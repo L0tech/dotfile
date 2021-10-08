@@ -30,7 +30,8 @@ font pango:monospace 10
 # and nm-applet is a desktop environment-independent system tray GUI for it.
 
 #autostart
-exec --no-startup-id compton --backend glx --paint-on-overlay --vsync opengl-swc
+# exec --no-startup-id compton --backend glx --paint-on-overlay --vsync opengl-swc
+exec --no-startup-id compton --config /home/dima/.config/compton.conf -b
 exec --no-startup-id i3block
 exec --no-startup-id nm-applet
 exec_always --no-startup-id "setxkbmap -model pc104 -layout us,ru -variant ,, -option grp:alt_shift_toggle"
@@ -114,7 +115,7 @@ bindsym $mod+F11 fullscreen toggle
 # bindsym $mod+e layout toggle split
 
 # toggle tiling / floating
-bindsym $mod+f floating toggle
+bindsym $mod+Mod1+f floating toggle
 
 # change focus between tiling / floating windows
 # bindsym $mod+space focus mode_toggle
@@ -157,7 +158,14 @@ bindsym $mod+8 workspace number $ws8
 bindsym $mod+9 workspace number $ws9
 bindsym $mod+0 workspace number $ws10
 
+bindsym $mod+Mod1+k workspace next
+bindsym $mod+Mod1+j workspace prev
+
+# переход к последнему открытому окну
+bindsym $mod+x [urgent=latest] focus
+
 # move focused container to workspace
+
 bindsym $mod+Shift+1 move container to workspace number $ws1
 bindsym $mod+Shift+2 move container to workspace number $ws2
 bindsym $mod+Shift+3 move container to workspace number $ws3
@@ -239,9 +247,17 @@ bar {
 exec i3-config-wizard
 
 #Рамки окон
-default_border pixel 1
-default_floating_border pixel 1
-hide_edge_borders none
+# default_border pixel 1
+# default_floating_border pixel 1
+# hide_edge_borders none
+
+#gaps
+for_window [class=".*"] border pixel 1
+smart_gaps on
+gaps inner 5
+gaps outer 0
+smart_borders on
+hide_edge_borders smart_no_gaps
 
 #mouse
 focus_follows_mouse yes
@@ -252,6 +268,7 @@ bindsym $mod+Escape exec xkill
 bindsym Print exec flameshot gui -p /home/dima/Изображения/
 bindsym $mod+F6 exec /home/dima/.config/i3/lock.sh
 bindsym Mod1+Tab exec rofi -show window
+bindsym $mod+f exec rofi -show file-browser
 bindsym Mod1+Control+t exec /home/dima/.config/rofi/rofitr
 bindsym Mod1+Control+s exec /home/dima/.config/rofi/web-search.sh
 
