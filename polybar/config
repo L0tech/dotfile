@@ -40,7 +40,7 @@ foreground = ${colors.foreground}
 line-size = 3
 line-color = ${colors.primary}
 
-border-color = ${background-alt}
+# border-color = ${background-alt}
 
 padding-left = 0
 padding-right = 1
@@ -48,16 +48,16 @@ padding-right = 1
 module-margin-left = 1
 module-margin-right = 2
 
-font-0 = fixed:pixelsize=10;1
-font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
-font-2 = siji:pixelsize=10;1
-font-3 = Font Awesome 5 Free:pixelsize=12;2
-font-4 = Font Awesome 5 Free Solid:pixelsize=12;2
-font-5 = Font Awesome 5 Brands:pixelsize=12;2
+font-0 = ;font-0 = Hack:pixelsize=10;3
+font-1 = siji:pixelsize=10;3
+font-2 = Font Awesome 5 Free:pixelsize=11;2
+font-3 = Font Awesome 5 Free Solid:pixelsize=11;2
+font-4 = Font Awesome 5 Brands:pixelsize=11;2
+font-5 = Weather Icons:size=12;1
 
-modules-left = i3
+modules-left = i3 filesystem system-usb-mount
 modules-center = 
-modules-right = weather cpu memory pulseaudio wlan xkeyboard date menu
+modules-right = openweathermap-fullfeatured cpu temperature memory wlan pulseaudio xkeyboard date menu
 
 ; tray-position = right
 ; tray-padding = 2
@@ -96,7 +96,7 @@ label-indicator-underline = ${colors.secondary}
 
 [module/filesystem]
 type = internal/fs
-interval = 25
+interval = 60
 
 mount-0 = /
 mount-1 = /home
@@ -115,7 +115,7 @@ wrapping-scroll = false
 ;pin-workspaces = true
 
 ws-icon-0 = 1;
-ws-icon-1 = 2;
+ws-icon-1 = 2;
 ws-icon-2 = 3;
 ws-icon-3 = 4;4
 ws-icon-4 = 5;5
@@ -133,7 +133,7 @@ label-mode-background = ${colors.primary}
 ; focused = Active workspace on focused monitor
 label-focused = %icon%
 label-focused-background = #282828
-label-focused-underline= #b8bb26
+label-focused-underline= #fabd2f
 label-focused-padding = 1
 
 ; unfocused = Inactive workspace on any monitor
@@ -159,7 +159,7 @@ type = internal/cpu
 interval = 2
 format-prefix = " "
 format-prefix-foreground = ${colors.foreground-alt}
-label = %percentage%
+label = %percentage%%
 
 [module/memory]
 type = internal/memory
@@ -175,15 +175,15 @@ interval = 1
 click-right = nm-connection-editor
 ; format-connected = <ramp-signal> <label-connected>
 format-connected =  <label-connected>
-format-connected-underline = #b8bb26
+# format-connected-underline = #b8bb26
 
-label-connected = %downspeed% %upspeed%
+label-connected =  %downspeed%  %upspeed%
 
 ; format-disconnected =
-; format-disconnected = <label-disconnected>
+; format-disconnected =  <label-disconnected>
 ;format-disconnected-underline = ${self.format-connected-underline}
-label-disconnected =  
-format-disconnected-underline = #fb4934
+label-disconnected =   %downspeed%  %upspeed%
+format-disconnected-foreground = #fb4934
 
 ;label-disconnected-foreground = ${colors.foreground-alt}
 
@@ -198,28 +198,29 @@ ramp-signal-foreground = ${colors.foreground-alt}
 type = internal/date
 interval = 1
 
-date = " %d.%m.%Y"
+date = %a %d.%m.%Y
 
-time = %H:%M:%S
+time = %H:%M:%S
 
 format-prefix = 
 format-prefix-foreground = ${colors.foreground-alt}
 
-label = %date%  %time%
+label =  %date%   %time%
 
 [module/pulseaudio]
 type = internal/pulseaudio
 
-format-volume = <ramp-volume> <label-volume> <bar-volume>
+format-volume = <ramp-volume> <label-volume> 
 label-volume =  %percentage%%
-label-volume-foreground = ${root.foreground}
-format-volume-underline = #b8bb26
-ramp-volume-0 = 
-ramp-volume-1 = 
+# label-volume-foreground = ${root.foreground}
+# format-volume-underline = #b8bb26
+ramp-volume-0 = 
+ramp-volume-1 = 
+ramp-volume-2 = 
 click-right = pavucontrol
-label-muted =  Muted
-label-muted-foreground = #666
-format-muted-underline = #fb4934
+label-muted =  %percentage%%
+label-muted-foreground = #fb4934
+# format-muted-underline = #fb4934
 
 bar-volume-width = 10
 bar-volume-foreground-0 = #b8bb26
@@ -256,13 +257,31 @@ margin-bottom = 5
 
 ; vim:ft=dosini
 
-[module/weather]
+# [module/weather]
+# type = custom/script
+# exec = curl -s 'wttr.in/Kiev\?format=%c%20%t%20%p&lang=ru' | cut -c 1-13 | cat
+# interva = 300
+
+[module/openweathermap-fullfeatured]
 type = custom/script
-exec = curl -s 'wttr.in/Heidelberg\?format=%c%20%t%20%p&lang=de' | cut -c 1-12
-interva = 3600
+exec = ~/.config/polybar/scripts/openweathermap-fullfeatured.sh
+interval = 600
+label-font = 6
 
 [module/menu]
 type = custom/text
 content = 
 click-left = ~/.config/rofi/bin/menu_powermenu
 
+[module/temperature]
+type = custom/script
+interval = 5
+exec = sensors | grep "[0,9]" | awk 'NR==2{ print $3 }' | cut -c 2-9 | cat
+
+
+[module/system-usb-mount]
+type = custom/script
+exec = ~/.config/polybar/scripts/system-usb-mount.sh
+interval = 5
+click-left = ~/.config/polybar/scripts/system-usb-mount.sh --mount &
+click-right = ~/.config/polybar/scripts/system-usb-mount.sh --unmount &
