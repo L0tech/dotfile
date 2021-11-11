@@ -52,8 +52,8 @@ get_duration() {
 
 }
 
-KEY=""
-CITY=""
+KEY="601278b74947ccafab80f8b2c2870194"
+CITY="Kiev"
 UNITS="metric"
 SYMBOL="°"
 
