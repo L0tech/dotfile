@@ -11,14 +11,14 @@
 
 ## Rofi general options
 # leave these empty or comment out to use system defaults:
-FONT="mono 10"
-WIDTH="50"
-LOCATION="2"
-YOFFSET="251"
+FONT=" DejaVu Sans Mono 10"
+WIDTH="1366"
+LOCATION="1"
+YOFFSET="0"
 
 # use alternative config and theme
 # CONFIG="~/.config/rofi/translate-config.rasi"
-# THEME="/usr/share/rofi/themes/lb.rasi"
+THEME="/home/dima/.config/rofi/rofitr.rasi"
 
 ## Rofi required options
 HIST_LINES="15" # lines to show for history mode

@@ -24,11 +24,11 @@ URLS=(
  # ["bing"]="https://www.bing.com/search?q="
  # ["yahoo"]="https://search.yahoo.com/search?p="
   ["duckduckgo"]="https://www.duckduckgo.com/?q="
-  ["yandex"]="https://yandex.ru/yandsearch?text="
+ # ["yandex"]="https://yandex.ru/yandsearch?text="
   ["github"]="https://github.com/search?q="
   ["rezka"]="https://rezka.ag/search/?do=search&subaction=search&q=%s"
  # ["goodreads"]="https://www.goodreads.com/search?q="
-  ["stackoverflow"]="http://stackoverflow.com/search?q="
+ # ["stackoverflow"]="http://stackoverflow.com/search?q="
  # ["symbolhound"]="http://symbolhound.com/?q="
  # ["searchcode"]="https://searchcode.com/?q="
  # ["openhub"]="https://www.openhub.net/p?ref=homepage&query="
@@ -41,10 +41,10 @@ URLS=(
  # ["vimawesome"]="http://vimawesome.com/?q="
   ["flibusta"]="http://flibusta.site/booksearch?ask=%"
   ["shikimori"]="https://shikimori.one/animes?search="
-  ["wikipedia"]="https://ru.wikipedia.org/w/index.php?search="
-  ["lukomore"]="https://lurkmore.to/index.php?title=%D0%A1%D0%BB%D1%83%D0%B6%D0%B5%D0%B1%D0%BD%D0%B0%D1%8F%3ASearch&search="
-  ["torrentseeker"]="https://torrentseeker.com/search.php?q="
-  ["zooqle"]="https://zooqle.com/search?q="
+ # ["wikipedia"]="https://ru.wikipedia.org/w/index.php?search="
+ # ["lukomore"]="https://lurkmore.to/index.php?title=%D0%A1%D0%BB%D1%83%D0%B6%D0%B5%D0%B1%D0%BD%D0%B0%D1%8F%3ASearch&search="
+ # ["torrentseeker"]="https://torrentseeker.com/search.php?q="
+ # ["zooqle"]="https://zooqle.com/search?q="
 )
 
 # List for rofi

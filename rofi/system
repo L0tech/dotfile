@@ -1,0 +1,36 @@
+#!/bin/bash
+
+ARR+=(" lock")
+ARR+=(" reboot")
+ARR+=(" shutdown")
+# ARR+=("suspend")
+ARR+=(" logout")
+
+uptime=$(uptime -p | uptime -p | sed -e 's/up //g' | sed -e 's/ours//g' | sed -e 's/ //g' | sed -e 's/inutes//g')
+
+CHOICE=$(printf '%s\n' "${ARR[@]}" | rofi -dmenu -config   ~/.config/rofi/sys.rasi -p "$uptime")
+
+if [ "$CHOICE" = " lock" ]; then
+    ~/.config/i3/scripts/lock.sh
+    exit 0
+fi
+
+if [ "$CHOICE" = " reboot" ]; then
+    systemctl reboot
+    exit 0
+fi
+
+if [ "$CHOICE" = " shutdown" ]; then
+    systemctl poweroff
+    exit 0
+fi
+
+# if [ "$CHOICE" = "suspend" ]; then
+    # systemctl suspend
+    # exit 0
+# fi
+
+if [ "$CHOICE" = " logout" ]; then
+    i3-msg exit
+    exit 0
+fi

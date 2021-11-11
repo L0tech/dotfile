@@ -1,10 +1,10 @@
 configuration {
 	modi: "drun,run";
 /* modi: "drun,run,file-browser,window"; */
-/*	width: 50;*/
+	width: 40;
 	lines: 10;
 /*	columns: 1;*/
-/*	font: "mono 12";*/
+	font: "DejaVu Sans Mono 12";
 /*	bw: 1;*/
 /*	location: 0;*/
 /*	padding: 5;*/
@@ -20,7 +20,7 @@ configuration {
 /*	run-shell-command: "{terminal} -e {cmd}";*/
 /*	window-command: "xkill -id {window}";*/
 /*	window-match-fields: "all";*/
-/*  drun-icon-theme: ; */
+    drun-icon-theme: "Gruvbox-Matirial-Dark";
 	drun-match-fields: "name,categories";
 /*	disable-history: false;*/
 	sort: true;
@@ -63,7 +63,7 @@ configuration {
 /*	display-windowcd: ;*/
 	display-run:"Run " ;
 /*	display-ssh: ;*/
-	display-drun:"Apps ";
+	display-drun:"Search";
 /*	display-combi: ;*/
 /*	display-keys: ;*/
 /*	kb-primary-paste: "Control+V,Shift+Insert";*/
@@ -140,3 +140,4 @@ configuration {
 }
 element-icon {size: 2ch; }
 @import "/usr/local/share/rofi/themes/gruvbox-dark.rasi"
+/* @import "/home/dima/.config/rofi/apps.rasi" */ 
