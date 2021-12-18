@@ -1,130 +1,185 @@
-# Autostart
-exec --no-startup-id /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1
-exec --no-startup-id playerctld daemon
-exec --no-startup-id "setxkbmap -model pc104 -layout us,ru,ua -variant ,, -option grp:alt_shift_toggle"
-exec --no-startup-id xset r rate 300 30
-exec --no-startup-id synclient HorizTwoFingerScroll=1
-exec --no-startup-id compton --config ~/.config/compton.conf 
-exec --no-startup-id nitrogen --restore
-exec --no-startup-id dunst -conf ~/.config/dunst/dunstrc
-exec_always --no-startup-id ~/.config/polybar/launch.sh
-exec_always --no-startup-id i3-layouts
-exec --no-startup-id /usr/lib/x86_64-linux-gnu/libexec/kdeconnectd
-exec --no-startup-id xss-lock --transfer-sleep-lock ~/.config/i3/scripts/lock
+##########################################################################################
+#                                                                                        #
+#           mmmmm   mmmm                                m""    "                         #
+#             #    "   "#         mmm    mmm   m mm   mm#mm  mmm     mmmm                #
+#             #      mmm"        #"  "  #" "#  #"  #    #      #    #" "#                #
+#             #        "#        #      #   #  #   #    #      #    #   #                #
+#           mm#mm  "mmm#"        "#mm"  "#m#"  #   #    #    mm#mm  "#m"#                #
+#                                                                   m  #                 #
+#                                                                    ""                  #
+#                                                                                        #
+##########################################################################################
 
+    #################
+    ### Autostart ###
+    #################
+##########################################################################################
+ exec --no-startup-id /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1
+ exec --no-startup-id playerctld daemon
+ exec --no-startup-id gxkb
+ exec --no-startup-id xset r rate 300 30
+ exec --no-startup-id synclient HorizTwoFingerScroll=1
+ exec --no-startup-id compton --config ~/.config/compton.conf 
+ exec --no-startup-id nitrogen --restore
+ exec --no-startup-id dunst -config ~/.config/dunst/dunstrc
+ exec_always --no-startup-id ~/.config/polybar/launch.sh
+ exec_always --no-startup-id i3-layouts
+ exec --no-startup-id /usr/lib/x86_64-linux-gnu/libexec/kdeconnectd
+ exec --no-startup-id xss-lock --transfer-sleep-lock ~/.config/i3/scripts/lock
+##########################################################################################
+
+    #############
+    ### Basic ###
+    #############
+##########################################################################################
 # Mod
-set $mod Mod4
+ set $mod Mod4
 
 # Font
-font pango:DejaVu Sans 10
+ font pango:DejaVu Sans 10
 
+# Mouse
+ focus_follows_mouse yes
+##########################################################################################
+
+    ####################
+    ### Key settings ###
+    ####################
+##########################################################################################
+# Keybind
+ bindsym $mod+Shift+r restart # Restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+ bindsym $mod+r exec --no-startup-id rofi -show
+ bindsym $mod+t exec urxvt
+ bindsym $mod+Shift+q kill
+ bindsym Control+Shift+Escape exec urxvt -e xkill
+ bindsym $mod+Shift+p exec ~/.config/polybar/scripts/polybar.sh/.config/polybar/scripts/polybar.sh
+ bindsym Mod1+Tab exec rofi -show window -window-thumbnail 
+ bindsym Mod1+Control+t exec ~/.config/rofi/rofitr
+ bindsym Mod1+Control+s exec ~/.config/rofi/web-search.sh
+ bindsym Mod1+Control+b exec ~/.config/rofi/rofi-beats
+ bindsym $mod+Shift+Escape  exec ~/.config/rofi/system
+ bindsym $mod+space exec polybar-msg cmd toggle
+ bindsym $mod+Mod1+l exec ~/.config/i3/scripts/lock
+
+# Use pactl to adjust volume in PulseAudio.
+ set $refresh_i3status killall -SIGUSR1 i3status
+ bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +1% && $refresh_i3status
+ bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -1% && $refresh_i3status
+ bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
+ bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
+
+# Media player controls
+ bindsym XF86AudioPlay exec playerctl play-pause
+ bindsym XF86AudioNext exec playerctl next
+ bindsym XF86AudioPrev exec playerctl previous
+
+# Sreen brightness controls
+ bindsym XF86MonBrightnessUp exec xbacklight -inc 25 # increase screen brightness
+ bindsym XF86MonBrightnessDown exec xbacklight -dec 25 # decrease screen brightness
+##########################################################################################
+
+    ########################
+    ### Windows settings ###
+    ########################
+##########################################################################################
 # Layout
-set $i3l autosplit to workspace $ws1
-set $i3l 3columns 0.65 0.4 2 right to workspace $ws2
-set $i3l autosplit to workspace $ws3
-set $i3l autosplit to workspace $ws4
-set $i3l autosplit to workspace $ws5
-set $i3l autosplit to workspace $ws6
-set $i3l autosplit to workspace $ws7
-set $i3l autosplit to workspace $ws8
-set $i3l autosplit to workspace $ws9
-set $i3l autosplit to workspace $ws10
+ set $i3l autosplit to workspace $ws1
+ set $i3l 3columns 0.65 0.4 2 right to workspace $ws2
+ set $i3l autosplit to workspace $ws3
+ set $i3l autosplit to workspace $ws4
+ set $i3l autosplit to workspace $ws5
+ set $i3l autosplit to workspace $ws6
+ set $i3l autosplit to workspace $ws7
+ set $i3l autosplit to workspace $ws8
+ set $i3l autosplit to workspace $ws9
+ set $i3l autosplit to workspace $ws10
 
-# Polybar hiding
-bindsym $mod+space exec polybar-msg cmd toggle
 # Change focus
-bindsym $mod+h focus left
-bindsym $mod+j focus down
-bindsym $mod+k focus up
-bindsym $mod+l focus right
+ bindsym $mod+h focus left
+ bindsym $mod+j focus down
+ bindsym $mod+k focus up
+ bindsym $mod+l focus right
 
 # Alternatively, you can use the cursor keys:
-bindsym $mod+Left focus left
-bindsym $mod+Down focus down
-bindsym $mod+Up focus up
-bindsym $mod+Right focus right
+ bindsym $mod+Left focus left
+ bindsym $mod+Down focus down
+ bindsym $mod+Up focus up
+ bindsym $mod+Right focus right
 
 # Move focused window
-bindsym $mod+Shift+h move left
-bindsym $mod+Shift+j move down
-bindsym $mod+Shift+k move up
-bindsym $mod+Shift+l move right
+ bindsym $mod+Shift+h move left
+ bindsym $mod+Shift+j move down
+ bindsym $mod+Shift+k move up
+ bindsym $mod+Shift+l move right
 
 # Alternatively, you can use the cursor keys:
-bindsym $mod+Shift+Left exec i3l move left
-bindsym $mod+Shift+Down exec i3l move down
-bindsym $mod+Shift+Up exec i3l move up
-bindsym $mod+Shift+Right exec i3l move right
+ bindsym $mod+Shift+Left exec i3l move left
+ bindsym $mod+Shift+Down exec i3l move down
+ bindsym $mod+Shift+Up exec i3l move up
+ bindsym $mod+Shift+Right exec i3l move right
 # Split in horizontal orientation
-bindsym $mod+Mod1+v split h
+ bindsym $mod+Mod1+v split h
 
 # Split in vertical orientation
-bindsym $mod+Mod1+h split v
+ bindsym $mod+Mod1+h split v
 
 # Enter fullscreen mode for the focused container
-bindsym F11 fullscreen toggle
-popup_during_fullscreen smart
+ bindsym F11 fullscreen toggle
+ popup_during_fullscreen smart
 
 # Toggle tiling / floating
-bindsym $mod+Mod1+f floating toggle, move absolute position center, border none
+ bindsym $mod+Shift+f floating toggle, move absolute position center, border none
 
 # Use Mouse+$mod to drag floating windows to their wanted position
-floating_modifier $mod
+ floating_modifier $mod
 
 # Move the currently focused window to the scratchpad
-bindsym $mod+minus move scratchpad
+ bindsym $mod+minus move scratchpad
 
 # Show the next scratchpad window or hide the focused scratchpad window.
-bindsym $mod+Shift+minus scratchpad show
+ bindsym $mod+Shift+minus scratchpad show
 
 # Names for  workspaces
-set $ws1 "1"
-set $ws2 "2"
-set $ws3 "3"
-set $ws4 "4"
-set $ws5 "5"
-set $ws6 "6"
-set $ws7 "7"
-set $ws8 "8"
-set $ws9 "9"
-set $ws10 "10"
+ set $ws1 "1"
+ set $ws2 "2"
+ set $ws3 "3"
+ set $ws4 "4"
+ set $ws5 "5"
+ set $ws6 "6"
+ set $ws7 "7"
+ set $ws8 "8"
+ set $ws9 "9"
+ set $ws10 "10"
 
 # Switch to workspace
-bindsym $mod+1 workspace number $ws1
-bindsym $mod+2 workspace number $ws2
-bindsym $mod+3 workspace number $ws3
-bindsym $mod+4 workspace number $ws4
-bindsym $mod+5 workspace number $ws5
-bindsym $mod+6 workspace number $ws6
-bindsym $mod+7 workspace number $ws7
-bindsym $mod+8 workspace number $ws8
-bindsym $mod+9 workspace number $ws9
-bindsym $mod+0 workspace number $ws10
+ bindsym $mod+1 workspace number $ws1
+ bindsym $mod+2 workspace number $ws2
+ bindsym $mod+3 workspace number $ws3
+ bindsym $mod+4 workspace number $ws4
+ bindsym $mod+5 workspace number $ws5
+ bindsym $mod+6 workspace number $ws6
+ bindsym $mod+7 workspace number $ws7
+ bindsym $mod+8 workspace number $ws8
+ bindsym $mod+9 workspace number $ws9
+ bindsym $mod+0 workspace number $ws10
 
-bindsym $mod+Mod1+j workspace next
-bindsym $mod+Mod1+k workspace prev
+ bindsym $mod+Mod1+j workspace next
+ bindsym $mod+Mod1+k workspace prev
 
 # Move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace number $ws1
-bindsym $mod+Shift+2 move container to workspace number $ws2
-bindsym $mod+Shift+3 move container to workspace number $ws3
-bindsym $mod+Shift+4 move container to workspace number $ws4
-bindsym $mod+Shift+5 move container to workspace number $ws5
-bindsym $mod+Shift+6 move container to workspace number $ws6
-bindsym $mod+Shift+7 move container to workspace number $ws7
-bindsym $mod+Shift+8 move container to workspace number $ws8
-bindsym $mod+Shift+9 move container to workspace number $ws9
-bindsym $mod+Shift+0 move container to workspace number $ws10
-
-
-# Restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-bindsym $mod+Shift+r restart
-
-# Exit i3 (logs you out of your X session)
-# bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+ bindsym $mod+Shift+1 move container to workspace number $ws1
+ bindsym $mod+Shift+2 move container to workspace number $ws2
+ bindsym $mod+Shift+3 move container to workspace number $ws3
+ bindsym $mod+Shift+4 move container to workspace number $ws4
+ bindsym $mod+Shift+5 move container to workspace number $ws5
+ bindsym $mod+Shift+6 move container to workspace number $ws6
+ bindsym $mod+Shift+7 move container to workspace number $ws7
+ bindsym $mod+Shift+8 move container to workspace number $ws8
+ bindsym $mod+Shift+9 move container to workspace number $ws9
+ bindsym $mod+Shift+0 move container to workspace number $ws10
 
 # Resize window (you can also use the mouse for that)
-mode " Resize" {
+ mode " Resize" {
         # These bindings trigger as soon as you enter the resize mode
 
         # Pressing left will shrink the window’s width.
@@ -145,10 +200,109 @@ mode " Resize" {
         # back to normal: Enter or Escape or $mod+r
         bindsym Return mode "default"
         bindsym Escape mode "default"
-}
+ }
 
-bindsym $mod+z mode " Resize"
+ bindsym $mod+z mode " Resize"
 
+# Borders
+ # default_border pixel 1
+ # default_floating_border pixel 1
+ # hide_edge_borders none
+ for_window [class=".*"] border pixel 2
+
+ mode "borders" {
+    bindsym n border none; mode "default"
+    bindsym o border pixel 1; mode "default"
+    bindsym b border pixel 2; mode "default"
+
+   
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+ }
+ bindsym $mod+Shift+b mode "borders"
+
+# Gaps
+ smart_gaps on
+ gaps inner 12
+ gaps outer 0
+ smart_borders on
+ hide_edge_borders smart_no_gaps
+
+ mode "gaps" {
+    bindsym n gaps inner all set 0; gaps outer all set 0; mode "default"
+    bindsym g gaps inner all set 12; gaps outer all set 0; mode "default"
+
+   
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+ }
+ bindsym $mod+Shift+g mode "gaps"
+
+# Borders themes
+ # # green gruvbox
+ # # class                 border  backgr  text    indicator
+ # client.focused          #98971a #98971a #1d2021 #98971a
+ # client.focused_inactive #1d2021 #1d2021 #d79921 #d12021
+ # client.unfocused        #1d2021 #1d2021 #d79921 #b16286
+ # client.urgent           #cc241d #cc241d #f9f5d7 #cc241d
+
+ # # blue gruvbox
+ # # class                 border  backgr  text    indicator
+ # client.focused          #458588 #458588 #1d2021 #458588
+ # client.focused_inactive #1d2021 #1d2021 #d79921 #1d2021
+ # client.unfocused        #1d2021 #1d2021 #d79921 #b16286
+ # client.urgent           #cc241d #cc241d #f9f5d7 #cc241d
+
+ # yellow gruvbox
+ # class                 border  backgr  text    indicator
+ client.focused          #d79921 #d79921 #1d2021 #d79921
+ client.focused_inactive #1d2021 #1d2021 #d79921 #1d2021
+ client.unfocused        #1d2021 #1d2021 #d79921 #b16286
+ client.urgent           #cc241d #cc241d #f9f5d7 #cc241d
+
+
+# Assing programs to workspace
+# for_window [class="URxvt"] move to workspace $ws1
+ for_window [class="Firefox"] move to workspace $ws2
+ for_window [class="LibreWolf"] move to workspace $ws2
+ for_window [class="Chromium-browser"] move to workspace $ws2
+ for_window [class="discord"] move to workspace $ws3
+ for_window [class="Telegram"] move to workspace $ws3
+ for_window [class="Viber"] move to workspace $ws3
+ for_window [class="KeePassXC"] move to workspace $ws4
+ for_window [class="vlc"] move to workspace $ws5
+ for_window [class="mpv"] move to workspace $ws5
+ for_window [class="retroarch"] move to workspace $ws6
+ for_window [class="wine"] move to workspace $ws6
+
+# Focus
+ for_window [class="URxvt"] focus
+ # for_window [class="Firefox"] focus
+ # for_window [class="LibreWolf"] focus
+ # for_window [class="Chromium-browser"] focus
+ for_window [class="KeePassXC"] focus
+
+# Floating
+ for_window [class="Nitrogen"] floating enable, move absolute position center
+ for_window [class="Blueman-manager"] floating enable, move absolute position center
+ for_window [class="Sxiv"] floating enable, move absolute position center
+
+ floating_minimum_size 300 x 150
+ floating_maximum_size 800 x 450
+
+# Sticky mode
+ for_window [class="Firefox"] sticky enable, border none
+ for_window [class="LibreWolf"] sticky enable, border none
+ for_window [class="Chromium-browser"] sticky enable, border none
+ for_window [title="Картинка в картинке"] sticky enable, border none
+ for_window [class="vlc"] sticky enable, border none
+ for_window [class="Adobe Photoshop CS6 Extended"] border none, floating enable
+##########################################################################################
+ 
+    ######################
+    ### I3bar settings ###
+    ######################
+##########################################################################################
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 # bar {
@@ -170,130 +324,16 @@ bindsym $mod+z mode " Resize"
 #     tray_padding 0
 #     status_command /usr/local/bin/i3status -c ~/.config/i3status/i3status.conf
 # }
+##########################################################################################
 
-# Borders
-# default_border pixel 1
-# default_floating_border pixel 1
-# hide_edge_borders none
-for_window [class=".*"] border pixel 2
-
-mode "borders" {
-    bindsym n border none; mode "default"
-    bindsym o border pixel 1; mode "default"
-    bindsym b border pixel 2; mode "default"
-
-   
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
-}
-bindsym $mod+Shift+b mode "borders"
-
-# Gaps
-smart_gaps on
-gaps inner 12
-gaps outer 0
-smart_borders on
-hide_edge_borders smart_no_gaps
-
-mode "gaps" {
-    bindsym n gaps inner all set 0; gaps outer all set 0; mode "default"
-    bindsym g gaps inner all set 12; gaps outer all set 0; mode "default"
-
-   
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
-}
-bindsym $mod+Shift+g mode "gaps"
-
-# Mouse
-focus_follows_mouse yes
-
-# Keybind
-bindsym $mod+r exec --no-startup-id rofi -show
-bindsym $mod+t exec urxvt
-bindsym $mod+Shift+q kill
-bindsym Mod1+Tab exec rofi -show window -window-thumbnail 
-bindsym Mod1+Control+t exec ~/.config/rofi/rofitr
-bindsym Mod1+Control+s exec ~/.config/rofi/web-search.sh
-bindsym Mod1+Control+b exec ~/.config/rofi/rofi-beats
-bindsym $mod+Shift+Escape  exec ~/.config/rofi/system
-
-# Use pactl to adjust volume in PulseAudio.
-set $refresh_i3status killall -SIGUSR1 i3status
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +1% && $refresh_i3status
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -1% && $refresh_i3status
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
-bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
-
-# Media player controls
-bindsym XF86AudioPlay exec playerctl play-pause
-bindsym XF86AudioNext exec playerctl next
-bindsym XF86AudioPrev exec playerctl previous
-
-# Sreen brightness controls
-bindsym XF86MonBrightnessUp exec xbacklight -inc 25 # increase screen brightness
-bindsym XF86MonBrightnessDown exec xbacklight -dec 25 # decrease screen brightness
-
-# # green gruvbox
-# # class                 border  backgr  text    indicator
-# client.focused          #98971a #98971a #1d2021 #98971a
-# client.focused_inactive #1d2021 #1d2021 #d79921 #d12021
-# client.unfocused        #1d2021 #1d2021 #d79921 #b16286
-# client.urgent           #cc241d #cc241d #f9f5d7 #cc241d
-
-# # blue gruvbox
-# # class                 border  backgr  text    indicator
-# client.focused          #458588 #458588 #1d2021 #458588
-# client.focused_inactive #1d2021 #1d2021 #d79921 #1d2021
-# client.unfocused        #1d2021 #1d2021 #d79921 #b16286
-# client.urgent           #cc241d #cc241d #f9f5d7 #cc241d
-
-# yellow gruvbox
-# class                 border  backgr  text    indicator
-client.focused          #d79921 #d79921 #1d2021 #d79921
-client.focused_inactive #1d2021 #1d2021 #d79921 #1d2021
-client.unfocused        #1d2021 #1d2021 #d79921 #b16286
-client.urgent           #cc241d #cc241d #f9f5d7 #cc241d
-
-
-# Assing programs to workspace
-# for_window [class="URxvt"] move to workspace $ws1
-for_window [class="Firefox"] move to workspace $ws2
-for_window [class="LibreWolf"] move to workspace $ws2
-for_window [class="Chromium-browser"] move to workspace $ws2
-for_window [class="discord"] move to workspace $ws3
-for_window [class="Telegram"] move to workspace $ws3
-for_window [class="Viber"] move to workspace $ws3
-for_window [class="KeePassXC"] move to workspace $ws4
-for_window [class="vlc"] move to workspace $ws5
-for_window [class="mpv"] move to workspace $ws5
-for_window [class="retroarch"] move to workspace $ws6
-for_window [class="wine"] move to workspace $ws6
-
-# Focus
-for_window [class="URxvt"] focus
-for_window [class="Firefox"] focus
-for_window [class="LibreWolf"] focus
-# for_window [class="Chromium-browser"] focus
-for_window [class="KeePassXC"] focus
-
-# Floating
-for_window [class="Nitrogen"] floating enable, move absolute position center
-for_window [class="Blueman-manager"] floating enable, move absolute position center
-
-floating_minimum_size 300 x 150
-floating_maximum_size 800 x 450
-
-# Sticky mode
-for_window [class="Firefox"] sticky enable, border none
-for_window [class="libreWolf"] sticky enable, border none
-for_window [class="Chromium-browser"] sticky enable, border none
-for_window [class="vlc"] sticky enable, border none
-
+    ################
+    ### My menus ###
+    ################
+##########################################################################################
 # Screenshot
-#bindsym Print exec --no-startup-id ~/.config/rofi/bin/menu_screenshot
-set $screenshot (f) (s) 
-mode "$screenshot" {
+ #bindsym Print exec --no-startup-id ~/.config/rofi/bin/menu_screenshot
+ set $screenshot (f) (s) 
+ mode "$screenshot" {
 	# Fullscreen
 	bindsym f exec sleep 0.5 && flameshot full -p ~/Изображения/Screenshots, mode "default"
 
@@ -303,20 +343,15 @@ mode "$screenshot" {
         # back to normal: Enter or Escape or $mod+r
         bindsym Return mode "default"
         bindsym Escape mode "default"
-}
-bindsym Print mode "$screenshot"
+ }
+ bindsym Print mode "$screenshot"
+##########################################################################################
+#                                                                                        #
+#                               mmmmmm            #                                      #
+#                               #      m mm    mmm#                                      #
+#                               #mmmmm #"  #  #" "#                                      #
+#                               #      #   #  #   #                                      #
+#                               #mmmmm #   #  "#m##                                      #
+#                                                                                        #
+##########################################################################################
 
-# System
-# bindsym $mod+Shift+Escape exec --no-startup-id ~/.config/rofi/bin/menu_powermenu
-# set $system (L)ock, (R)eboot, (S)hutdown, s(U)spend, l(O)gout
-# mode "$system" {
-# 	bindsym r exec systemctl reboot, mode "default"
-#     bindsym s exec systemctl poweroff, mode "default"
-#     bindsym l exec ~/.config/i3/scripts/lock, mode "default"
-#     bindsym u exec systemctl suspend, mode "default"
-#     bindsym o exec i3-msg exit, mode "default"
-#         # back to normal: Enter or Escape or $mod+r
-#         bindsym Return mode "default"
-#         bindsym Escape mode "default"
-# }
-# bindsym $mod+Shift+Escape mode "$system"
