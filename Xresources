@@ -5,9 +5,9 @@ URxvt*scrollTtyKeypress: true
 ! отображение скроллбара
 URxvt.scrollBar: false
 ! perl расширения
-Urxvt.perl-ext-common:default,clipboard,keyboard-select,matcher,tabbed
+Urxvt.perl-ext-common:default,clipboard,keyboard-select,matcher,tabbed,font-size
 ! кликабельные url ссылки
-URxvt.url-launcher: /usr/bin/surf
+URxvt.url-launcher: /usr/bin/xdg-open
 URxvt.matcher.button: 1
 Urxvt.underlineURLs:true
 ! поддержка Ctrl-Shift-c, Ctrl-Shift-v
@@ -19,12 +19,20 @@ URxvt.iso14755_52: false
 URxvt.keysym.Control-Left:   \033[1;5D
 URxvt.keysym.Control-Right:  \033[1;5C
 ! шрифт
-URxvt*font: xft:Monaco :size=10, xft:FontAwesome-11
-#URxvt*font: xft:Hack Nerd Font Mono:size=10
-#URxvt*boldItalicFont: xft:Hack Nerd Font Bold Italic:size=10
-#URxvt*boldFont: xft:Hack Nerd Font Bold:size=10
-#URxvt*italicFont: xft:Hack Nerd Font Italic:size=10
+URxvt*font: xft:DejaVu Sans Mono:size=10,xft:DejaVuSansMono Nerd Font Mono:size=10,xft:DejaVuSansMono Nerd Font:size=10,xft:DejaVu Sans Mono NF:size=10,xft:FontAwesome:size=10
+/* URxvt*boldFont: xft:DejaVu Sans Mono Bold:size=10,xft:FontAwesome:size=12 */
+/* URxvt*italicFont: xft:DejaVu Sans Mono Oblique:size=10,xft:FontAwesome:size=12 */
+/* URxvt*boldItalicFont: xft:DejaVu Sans Mono Bold Oblique:size=10,xft:FontAwesome:size=12 */
 
+### Font size ###
+URxvt.keysym.C-Up:     font-size:increase
+URxvt.keysym.C-Down:   font-size:decrease
+URxvt.keysym.C-S-Up:   font-size:incglobal
+URxvt.keysym.C-S-Down: font-size:decglobal
+URxvt.keysym.C-equal:  font-size:reset
+URxvt.keysym.C-slash:  font-size:show
+
+/* URxvt.letterSpace: -4 */
 !-- Xft settings -- !
 Xft.dpi:        96
 Xft.antialias:  true
@@ -99,6 +107,38 @@ Xft.lcdfilter:  lcddefault
 /* *color7: #eee8d5 */
 /* *color15: #fdf6e3 */
 
+! ========Gruvbox 256 colorschem=========
+URxvt.color24:  #076678
+URxvt.color66:  #427b58
+URxvt.color88:  #9d0006
+URxvt.color96:  #8f3f71
+URxvt.color100: #79740e
+URxvt.color108: #8ec07c
+URxvt.color109: #83a598
+URxvt.color130: #af3a03
+URxvt.color136: #b57614
+URxvt.color142: #b8bb26
+URxvt.color167: #fb4934
+URxvt.color175: #d3869b
+URxvt.color208: #fe8019
+URxvt.color214: #fabd2f
+URxvt.color223: #ebdbb2
+URxvt.color228: #f2e5bc
+URxvt.color229: #fbf1c7
+URxvt.color230: #f9f5d7
+URxvt.color234: #1d2021
+URxvt.color235: #282828
+URxvt.color236: #32302f
+URxvt.color237: #3c3836
+URxvt.color239: #504945
+URxvt.color241: #665c54
+URxvt.color243: #7c6f64
+URxvt.color244: #928374
+URxvt.color245: #928374
+URxvt.color246: #a89984
+URxvt.color248: #bdae93
+URxvt.color250: #d5c4a1
+
 ! ========Gruvbox colorschem=========
 ! hard contrast: *background: #1d2021
 *background: #282828
@@ -130,4 +170,5 @@ Xft.lcdfilter:  lcddefault
 *color15: #ebdbb2
 
 ! тема курсора 
-Xcursor.theme: Qogir-white-cursors
+Xcursor.theme: Breeze-cursors
+/* Xcursor.theme: Qogir-white-cursors */
