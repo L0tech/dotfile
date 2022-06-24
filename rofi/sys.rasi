@@ -5,4 +5,5 @@ configuration {
     location: 3;
     yoffset: 20;
 }
-@import "/usr/local/share/rofi/themes/gruvbox-dark.rasi"
+@import "/usr/share/rofi/themes/gruvbox-dark.rasi"
+

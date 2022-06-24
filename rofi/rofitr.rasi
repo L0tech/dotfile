@@ -94,7 +94,7 @@ mode-switcher {
 inputbar {
     spacing:    0;
     text-color: @normal-foreground;
-    padding:    2px;
+    padding:    1px;
     children:   [ prompt, textbox-prompt-sep, entry, case-indicator ];
 }
 

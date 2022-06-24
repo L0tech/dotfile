@@ -3,22 +3,21 @@
 
 ## Set defaults
 # SOURCE="en"               # source language code
- TARGET="ru"               # translation language code
+ TARGET="uk"               # translation language code
  ENGINE="google"           # google, yandex or bing
- LOCALE="ru"               # translator language ($LANG var. by default)
+ LOCALE="uk"               # translator language ($LANG var. by default)
 # SPEAK_SOURCE="false"      # speak the source (true/false)
 # SPEAK_TRANSLATION="false" # speak the translation (true/false)
 
 ## Rofi general options
 # leave these empty or comment out to use system defaults:
 FONT=" DejaVu Sans Mono 10"
-WIDTH="1366"
-LOCATION="1"
+LOCATION="0"
 YOFFSET="0"
 
 # use alternative config and theme
 # CONFIG="~/.config/rofi/translate-config.rasi"
-THEME="/home/dima/.config/rofi/rofitr.rasi"
+THEME="/usr/share/rofi/themes/gruvbox-dark.rasi"
 
 ## Rofi required options
 HIST_LINES="15" # lines to show for history mode
